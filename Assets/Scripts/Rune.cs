@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Rune : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int _requiredOrbs = 1;
+
+    private Player _player;
+
+    private void Start()
     {
-        
+        _player = GameObject.Find("FirstPersonController").GetComponent<Player>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.name == "FirstPersonController")
+        {
+            if (_player.Orbs >= _requiredOrbs)
+            {
+                Debug.Log("You Win");
+            }
+        }
     }
 }
